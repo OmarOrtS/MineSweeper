@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d66ad718-5c59-4f91-a854-f2071295ca97" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="d66ad718-5c59-4f91-a854-f2071295ca97" name="Changes" comment="Cell class created, a cell can either be a mine or an empty cell">
+      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Board.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +40,11 @@
     "git-widget-placeholder": "master"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="software.ulpgc.mineSwepper.model" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -49,6 +54,37 @@
       <option name="presentableId" value="Default" />
       <updated>1729556441031</updated>
     </task>
+    <task id="LOCAL-00001" summary="Board class created as singleton so only one board can exist fore each game">
+      <option name="closed" value="true" />
+      <created>1729556891694</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1729556891694</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Matrix class created, as well as board class only one matrix can exist for each game">
+      <option name="closed" value="true" />
+      <created>1729556983712</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729556983712</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Cell class created, a cell can either be a mine or an empty cell">
+      <option name="closed" value="true" />
+      <created>1729557064558</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1729557064558</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Board class created as singleton so only one board can exist fore each game" />
+    <MESSAGE value="Matrix class created, as well as board class only one matrix can exist for each game" />
+    <MESSAGE value="Cell class created, a cell can either be a mine or an empty cell" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cell class created, a cell can either be a mine or an empty cell" />
   </component>
 </project>
