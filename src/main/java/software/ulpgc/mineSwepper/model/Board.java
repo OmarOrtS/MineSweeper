@@ -22,7 +22,7 @@ public class Board {
 
     private void initializeBoard() {
         for (int i = 0;i < cells.getRows();i++) for (int j = 0; j < cells.getColumns(); j++)
-            cells.getCells()[i][j] = new Cell();
+            cells.getCells()[i][j] = new Cell(false, false, 0);
         generateMines();
         calculateAdjacentMines();
     }
@@ -36,11 +36,11 @@ public class Board {
 
                     List<Point> points = cells.getCells()[i][j].getAdjacentCell(new Point(i, j));
                     for (Point point : points)
-                        if (point.getX() >= 0 && point.getX() < cells.getRows() && point.getY() >= 0
-                                && point.getY() < cells.getColumns()
-                                && cells.getCells()[point.getX()][point.getY()].isMine()) minesCount++;
+                        if (point.x() >= 0 && point.x() < cells.getRows() && point.y() >= 0
+                                && point.y() < cells.getColumns()
+                                && cells.getCells()[point.x()][point.y()].isMine()) minesCount++;
 
-                    cells.getCells()[i][j].setAdjacentMine(minesCount);
+                    cells.getCells()[i][j] = new Cell(false, false, minesCount);
                 }
     }
 
@@ -52,10 +52,13 @@ public class Board {
             int randomRow = rand.nextInt(cells.getRows());
             int randomCol = rand.nextInt(cells.getColumns());
             if (!cells.getCells()[randomRow][randomCol].isMine()){
-                cells.getCells()[randomRow][randomCol].placeMine();
+                cells.getCells()[randomRow][randomCol] = new Cell(true, false, 0);
                 placedMines++;
             }
         }
     }
 
+    public int totalMines() {
+        return totalMines;
+    }
 }

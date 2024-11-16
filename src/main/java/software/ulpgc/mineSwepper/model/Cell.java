@@ -4,18 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cell {
-    private boolean isMine;
-    private boolean isRevealed;
-    private int adjacentMines;
+    private final boolean isMine;
+    private final boolean isRevealed;
+    private final int adjacentMines;
 
-    public Cell() {
-        this.isMine = false;
-        this.isRevealed = false;
-        this.adjacentMines = 0;
-    }
-
-    public void placeMine() {
-        this.isMine = true;
+    public Cell(boolean isMine, boolean isRevealed, int adjacentMines) {
+        this.isMine = isMine;
+        this.isRevealed = isRevealed;
+        this.adjacentMines = adjacentMines;
     }
 
     public boolean isMine() { return isMine; }
@@ -24,36 +20,21 @@ public class Cell {
         return isRevealed;
     }
 
-    public void reveal(){
-        this.isRevealed = true;
-    }
+    public Cell reveal(){ return isRevealed ? this : new Cell(isMine, true, adjacentMines); }
 
     public int getAdjacentMine() {return adjacentMines;}
-
-    public void setAdjacentMine(int adjacentMines) {this.adjacentMines = adjacentMines;}
 
     public List<Point> getAdjacentCell(Point point) {
         List<Point> points = new ArrayList<>();
         int[] directions = {-1, 0, 1};
         for (int dx : directions) for (int dy : directions)
-            points.add(new Point(point.getX() + dx, point.getY() + dy));
+            points.add(new Point(point.x() + dx, point.y() + dy));
         return points;
     }
 
     public void revealCell(Point point, Matrix cells){
-        if (!cells.getCells()[point.getX()][point.getY()].isRevealed()){
-            cells.getCells()[point.getX()][point.getY()].reveal();
-            if (cells.getCells()[point.getX()][point.getY()].getAdjacentMine() == 0)
-                revealAdjacentCell(point, cells);
-        }
+        if (!cells.getCells()[point.x()][point.y()].isRevealed())
+            cells.getCells()[point.x()][point.y()].reveal();
     }
 
-    private void revealAdjacentCell(Point point, Matrix cells) {
-        List<Point> points = cells.getCells()[point.getX()][point.getY()].getAdjacentCell(new Point(point.getX(), point.getY()));
-        for (Point adjacentpoint : points)
-            if (adjacentpoint.getX() >= 0 && adjacentpoint.getX() < cells.getRows() && adjacentpoint.getY() >= 0
-                    && adjacentpoint.getY() < cells.getColumns()
-                    && !cells.getCells()[adjacentpoint.getX()][adjacentpoint.getY()].isRevealed())
-                revealCell(adjacentpoint, cells);
-    }
 }
