@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d66ad718-5c59-4f91-a854-f2071295ca97" name="Changes" comment="Added methods to reveal cells and reveal adjacent cells if no adjacent mines are founded">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/control/Command.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/control/RevealCellCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/CellIterator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/MineSweeperGUI.java" afterDir="false" />
+    <list default="true" id="d66ad718-5c59-4f91-a854-f2071295ca97" name="Changes" comment="Refactored a bunch of methods and the whole cell class&#10;Need to check propagateReveal method and refactor Board and Matrix classes&#10;Need to move reveal methods to RevealCellCommad">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Point.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +102,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729557453213</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Refactored a bunch of methods and the whole cell class&#10;Need to check propagateReveal method and refactor Board and Matrix classes&#10;Need to move reveal methods to RevealCellCommad">
+      <option name="closed" value="true" />
+      <created>1731722555698</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731722555698</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -120,6 +119,7 @@
     <MESSAGE value="Cell class created, a cell can either be a mine or an empty cell" />
     <MESSAGE value="Board initialization methods added, Point class created to locate cells in a matrix" />
     <MESSAGE value="Added methods to reveal cells and reveal adjacent cells if no adjacent mines are founded" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added methods to reveal cells and reveal adjacent cells if no adjacent mines are founded" />
+    <MESSAGE value="Refactored a bunch of methods and the whole cell class&#10;Need to check propagateReveal method and refactor Board and Matrix classes&#10;Need to move reveal methods to RevealCellCommad" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored a bunch of methods and the whole cell class&#10;Need to check propagateReveal method and refactor Board and Matrix classes&#10;Need to move reveal methods to RevealCellCommad" />
   </component>
 </project>
