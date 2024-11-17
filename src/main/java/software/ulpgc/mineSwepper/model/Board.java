@@ -2,6 +2,7 @@ package software.ulpgc.mineSwepper.model;
 
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 
 public class Board {
@@ -27,19 +28,28 @@ public class Board {
 
 
     private void calculateAdjacentMines() {
-        for (int i = 0; i < cells.getRows(); i++)
-            for (int j = 0; j < cells.getColumns(); j++)
-                if (!cells.getCells()[i][j].isMine()) {
-                    int minesCount = 0;
+        IntStream.range(0, cells.getRows()).forEach(i ->
+                IntStream.range(0, cells.getColumns()).forEach(j -> {
+                    if (cellIsNotMine(i, j)) {
+                        long minesCount = cells.getCells()[i][j]
+                                .getAdjacentCell(new CellLocation(i, j)).stream()
+                                .filter(l -> cellIsWithinLimits(l) &&
+                                        !cellIsNotMine(l.x(), l.y()))
+                                .count();
 
-                    List<CellLocation> cellLocations = cells.getCells()[i][j].getAdjacentCell(new CellLocation(i, j));
-                    for (CellLocation cellLocation : cellLocations)
-                        if (cellLocation.x() >= 0 && cellLocation.x() < cells.getRows() && cellLocation.y() >= 0
-                                && cellLocation.y() < cells.getColumns()
-                                && cells.getCells()[cellLocation.x()][cellLocation.y()].isMine()) minesCount++;
+                        cells.getCells()[i][j] = new Cell(false, false, (int) minesCount);
+                    }
+                })
+        );
+    }
 
-                    cells.getCells()[i][j] = new Cell(false, false, minesCount);
-                }
+    private boolean cellIsWithinLimits(CellLocation l) {
+        return l.x() >= 0 && l.x() < cells.getRows() &&
+                l.y() >= 0 && l.y() < cells.getColumns();
+    }
+
+    private boolean cellIsNotMine(int i, int j) {
+        return !cells.getCells()[i][j].isMine();
     }
 
     private void generateMines() {
@@ -49,7 +59,7 @@ public class Board {
         while (placedMines < totalMines){
             int randomRow = rand.nextInt(cells.getRows());
             int randomCol = rand.nextInt(cells.getColumns());
-            if (!cells.getCells()[randomRow][randomCol].isMine()){
+            if (cellIsNotMine(randomRow, randomCol)){
                 cells.getCells()[randomRow][randomCol] = new Cell(true, false, 0);
                 placedMines++;
             }
