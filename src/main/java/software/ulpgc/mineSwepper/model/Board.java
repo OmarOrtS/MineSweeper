@@ -5,7 +5,6 @@ import java.util.Random;
 
 
 public class Board {
-    private static Board instance;
     private final int totalMines;
     public final Matrix cells;
 
@@ -15,9 +14,8 @@ public class Board {
         initializeBoard();
     }
 
-    public static Board getInstance(Matrix matrix, int totalMines){
-        if (instance == null) instance = new Board(matrix, totalMines);
-        return instance;
+    public static Board createBoard(Matrix matrix, int totalMines){
+        return new Board(matrix, totalMines);
     }
 
     private void initializeBoard() {
@@ -34,11 +32,11 @@ public class Board {
                 if (!cells.getCells()[i][j].isMine()) {
                     int minesCount = 0;
 
-                    List<Point> points = cells.getCells()[i][j].getAdjacentCell(new Point(i, j));
-                    for (Point point : points)
-                        if (point.x() >= 0 && point.x() < cells.getRows() && point.y() >= 0
-                                && point.y() < cells.getColumns()
-                                && cells.getCells()[point.x()][point.y()].isMine()) minesCount++;
+                    List<CellLocation> cellLocations = cells.getCells()[i][j].getAdjacentCell(new CellLocation(i, j));
+                    for (CellLocation cellLocation : cellLocations)
+                        if (cellLocation.x() >= 0 && cellLocation.x() < cells.getRows() && cellLocation.y() >= 0
+                                && cellLocation.y() < cells.getColumns()
+                                && cells.getCells()[cellLocation.x()][cellLocation.y()].isMine()) minesCount++;
 
                     cells.getCells()[i][j] = new Cell(false, false, minesCount);
                 }

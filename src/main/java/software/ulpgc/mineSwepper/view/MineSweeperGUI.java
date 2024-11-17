@@ -4,13 +4,12 @@ import software.ulpgc.mineSwepper.control.CommandHandler;
 import software.ulpgc.mineSwepper.control.revealCellCommandHandler;
 import software.ulpgc.mineSwepper.control.RevealCellCommand;
 import software.ulpgc.mineSwepper.model.Board;
-import software.ulpgc.mineSwepper.model.Point;
+import software.ulpgc.mineSwepper.model.CellLocation;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MineSweeperGUI extends JFrame {
-    private final BoardController controller;
     private final JButton[][] buttons;
     private final CommandHandler handler;
 
@@ -20,7 +19,6 @@ public class MineSweeperGUI extends JFrame {
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLayout(new GridLayout(board.cells.getRows(), board.cells.getColumns()));
         this.buttons = addButtonsToFrame(frame, board);
-        this.controller = new BoardController(board, this.buttons);
         frame.setSize(800, 800);
         frame.setVisible(true);
     }
@@ -30,7 +28,7 @@ public class MineSweeperGUI extends JFrame {
         for (int i = 0; i < board.cells.getRows(); i++)
             for (int j = 0; j < board.cells.getColumns(); j++) {
                 JButton button = createButton();
-                handler.registerCommand("Reveal:"+i+":"+j, new RevealCellCommand(new BoardController(board, buttons), new Point(i,j)));
+                handler.registerCommand("Reveal:"+i+":"+j, new RevealCellCommand(new BoardController(board, buttons), new CellLocation(i,j)));
                 final int x = i, y = j;
                 button.addActionListener(e -> handler.handle("Reveal:"+x+":"+y));
                 buttons[i][j] = button;

@@ -3,7 +3,7 @@ package software.ulpgc.mineSwepper.view;
 import software.ulpgc.mineSwepper.model.Board;
 import software.ulpgc.mineSwepper.model.Cell;
 import software.ulpgc.mineSwepper.model.CellIterator;
-import software.ulpgc.mineSwepper.model.Point;
+import software.ulpgc.mineSwepper.model.CellLocation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,42 +18,47 @@ public class BoardController {
         this.buttons = buttons;
     }
 
-    public void revealCell(Point point) {
-        Cell cell = board.cells.getCells()[point.x()][point.y()];
+    public void revealCell(CellLocation cellLocation) {
+        Cell cell = board.cells.getCells()[cellLocation.x()][cellLocation.y()];
 
         if (cell.isRevealed()) return;
 
-        cell.reveal();
+        Cell revealedCell = cell.reveal();
+        board.cells.getCells()[cellLocation.x()][cellLocation.y()] = revealedCell;
 
-        JButton button = buttons[point.x()][point.y()];
-        if (cell.isMine()) {
+        JButton button = buttons[cellLocation.x()][cellLocation.y()];
+        if (revealedCell.isMine()) {
             button.setText("💣");
             button.setBackground(Color.RED);
             JOptionPane.showMessageDialog(null, "Game Over! You hit a mine!");
             //resetGame();
         } else {
-            int adjacentMines = cell.getAdjacentMine();
+            int adjacentMines = revealedCell.getAdjacentMine();
             button.setText(adjacentMines > 0 ? String.valueOf(adjacentMines) : "");
             button.setEnabled(false);
             button.setBackground(Color.LIGHT_GRAY);
 
             if (adjacentMines == 0) {
-                //propagateReveal(point.x(), point.y());
+                propagateReveal(cellLocation);
             }
         }
         //checkWinCondition();
     }
 
-    private void propagateReveal(Point point) {
+    private void propagateReveal(CellLocation cellLocation) {
         int[] directions = {-1, 0, 1};
         Arrays.stream(directions).forEach(dx -> Arrays.stream(directions).forEach(dy -> {
-            int newX = point.x() + dx;
-            int newY = point.y() + dy;
-            if (newX >= 0 && newX < board.cells.getRows() && newY >= 0 && newY < board.cells.getColumns()
-                    && !board.cells.getCells()[newX][newY].isRevealed()) {
-                revealCell(new Point(newX, newY));
-            }
+            if (dx == 0 && dy == 0) return;
+            if (cellIsWithinLimits(new CellLocation(cellLocation.x()+dx, cellLocation.y()+dy))
+                    && cellIsNotRevealed(new CellLocation(cellLocation.x()+dx, cellLocation.y()+dy)))
+                revealCell(new CellLocation(cellLocation.x() + dx, cellLocation.y() + dy));
         }));
+    }
+
+    private boolean cellIsNotRevealed(CellLocation cellLocation) {return !board.cells.getCells()[cellLocation.x()][cellLocation.y()].isRevealed(); }
+
+    private boolean cellIsWithinLimits(CellLocation cellLocation) {
+        return cellLocation.x() >= 0 && cellLocation.x() < board.cells.getRows() && cellLocation.y() >= 0 && cellLocation.y() < board.cells.getColumns();
     }
 
     private void checkWinCondition() {
@@ -69,5 +74,4 @@ public class BoardController {
         }
     }
 
-    public Board board() { return board; }
 }

@@ -21,9 +21,7 @@ public class Matrix {
         return cells;
     }
 
-    public int getRows() {
-        return rows;
-    }
+    public int getRows() { return rows; }
 
     public int getColumns() {
         return columns;

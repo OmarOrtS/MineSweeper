@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d66ad718-5c59-4f91-a854-f2071295ca97" name="Changes" comment="Updated game version">
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/control/CommandHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/control/revealCellCommandHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/BoardController.java" afterDir="false" />
+    <list default="true" id="d66ad718-5c59-4f91-a854-f2071295ca97" name="Changes" comment="Added a handler to Command Pattern to keep Control independent to view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/control/RevealCellCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/control/RevealCellCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Matrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/CellLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/MineSweeperGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/MineSweeperGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731722632967</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added a handler to Command Pattern to keep Control independent to view">
+      <option name="closed" value="true" />
+      <created>1731735220176</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731735220176</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -134,6 +144,7 @@
     <MESSAGE value="Added methods to reveal cells and reveal adjacent cells if no adjacent mines are founded" />
     <MESSAGE value="Refactored a bunch of methods and the whole cell class&#10;Need to check propagateReveal method and refactor Board and Matrix classes&#10;Need to move reveal methods to RevealCellCommad" />
     <MESSAGE value="Updated game version" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated game version" />
+    <MESSAGE value="Added a handler to Command Pattern to keep Control independent to view" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a handler to Command Pattern to keep Control independent to view" />
   </component>
 </project>

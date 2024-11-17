@@ -1,4 +1,4 @@
 package software.ulpgc.mineSwepper.model;
 
-public record Point(int x, int y) {
+public record CellLocation(int x, int y) {
 }
