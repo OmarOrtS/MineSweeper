@@ -1,6 +1,5 @@
 package software.ulpgc.mineSwepper.model;
 
-import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 

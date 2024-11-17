@@ -8,6 +8,7 @@ import software.ulpgc.mineSwepper.model.CellLocation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.stream.IntStream;
 
 public class MineSweeperGUI extends JFrame {
     private final JButton[][] buttons;
@@ -25,15 +26,17 @@ public class MineSweeperGUI extends JFrame {
 
     private JButton[][] addButtonsToFrame(JFrame frame, Board board) {
         JButton[][] buttons = new JButton[board.cells.getRows()][board.cells.getColumns()];
-        for (int i = 0; i < board.cells.getRows(); i++)
-            for (int j = 0; j < board.cells.getColumns(); j++) {
-                JButton button = createButton();
-                handler.registerCommand("Reveal:"+i+":"+j, new RevealCellCommand(new BoardController(board, buttons), new CellLocation(i,j)));
-                final int x = i, y = j;
-                button.addActionListener(e -> handler.handle("Reveal:"+x+":"+y));
-                buttons[i][j] = button;
-                frame.add(button);
-            }
+        IntStream.range(0, board.cells.getRows()).forEach(i ->
+                IntStream.range(0, board.cells.getColumns()).forEach(j -> {
+                    JButton button = createButton();
+                    String commandKey = "Reveal:" + i + ":" + j;
+                    handler.registerCommand(commandKey,
+                            new RevealCellCommand(new BoardController(board, buttons), new CellLocation(i, j)));
+                    button.addActionListener(e -> handler.handle(commandKey));
+                    buttons[i][j] = button;
+                    frame.add(button);
+                })
+        );
         return buttons;
     }
 
