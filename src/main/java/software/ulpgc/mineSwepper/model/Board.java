@@ -47,7 +47,7 @@ public class Board {
                 l.y() >= 0 && l.y() < cells.getColumns();
     }
 
-    private boolean cellIsNotMine(int i, int j) {
+    public boolean cellIsNotMine(int i, int j) {
         return !cells.getCells()[i][j].isMine();
     }
 

@@ -47,12 +47,20 @@ public class BoardController {
 
     private void propagateReveal(CellLocation cellLocation) {
         int[] directions = {-1, 0, 1};
-        Arrays.stream(directions).forEach(dx -> Arrays.stream(directions).forEach(dy -> {
-            if (dx == 0 && dy == 0) return;
-            if (cellIsWithinLimits(new CellLocation(cellLocation.x()+dx, cellLocation.y()+dy))
-                    && cellIsNotRevealed(new CellLocation(cellLocation.x()+dx, cellLocation.y()+dy)))
-                revealCell(new CellLocation(cellLocation.x() + dx, cellLocation.y() + dy));
+        Arrays.stream(directions).forEach(x -> Arrays.stream(directions).forEach(y -> {
+            if (x == 0 && y == 0) return;
+            if (cellIsValidToReval(cellLocation, x, y))
+                revealCell(nextCell(cellLocation, x, y));
         }));
+    }
+
+    private boolean cellIsValidToReval(CellLocation cellLocation, int x, int y) {
+        return cellIsWithinLimits(nextCell(cellLocation, x, y))
+                && cellIsNotRevealed(nextCell(cellLocation, x, y));
+    }
+
+    private static CellLocation nextCell(CellLocation cellLocation, int x, int y) {
+        return new CellLocation(cellLocation.x() + x, cellLocation.y() + y);
     }
 
     private boolean cellIsNotRevealed(CellLocation cellLocation) {return !board.cells.getCells()[cellLocation.x()][cellLocation.y()].isRevealed(); }
