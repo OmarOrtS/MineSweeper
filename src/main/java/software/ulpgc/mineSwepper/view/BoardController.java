@@ -2,7 +2,6 @@ package software.ulpgc.mineSwepper.view;
 
 import software.ulpgc.mineSwepper.model.Board;
 import software.ulpgc.mineSwepper.model.Cell;
-import software.ulpgc.mineSwepper.model.CellIterator;
 import software.ulpgc.mineSwepper.model.CellLocation;
 
 import javax.swing.*;
@@ -42,7 +41,7 @@ public class BoardController {
                 propagateReveal(cellLocation);
             }
         }
-        //checkWinCondition();
+        checkWinCondition();
     }
 
     private void propagateReveal(CellLocation cellLocation) {
@@ -70,12 +69,12 @@ public class BoardController {
     }
 
     private void checkWinCondition() {
-        int revealedCells = 0;
+        long revealedCells = Arrays.stream(board.cells.getCells())
+                .flatMap(Arrays::stream)
+                .filter(c -> !c.isMine())
+                .filter(Cell::isRevealed)
+                .count();
         int totalCells = board.cells.getRows() * board.cells.getColumns();
-        CellIterator cellIterator = new CellIterator(board.cells);
-        while (cellIterator.hasNext())
-            if (cellIterator.next().isRevealed()) revealedCells++;
-
         if (revealedCells == totalCells - board.totalMines()) {
             JOptionPane.showMessageDialog(null, "Congratulations! You won!");
             //resetGame();

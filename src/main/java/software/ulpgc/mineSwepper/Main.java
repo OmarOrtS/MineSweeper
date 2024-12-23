@@ -6,6 +6,6 @@ import software.ulpgc.mineSwepper.view.MineSweeperGUI;
 
 public class Main {
     public static void main(String[] args) {
-        MineSweeperGUI mineSweeperGUI = new MineSweeperGUI(Board.createBoard(new Matrix(16, 16), 40));
+        new MineSweeperGUI(Board.createBoard(new Matrix(16, 16), 40));
     }
 }

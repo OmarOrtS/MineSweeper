@@ -5,11 +5,11 @@ import software.ulpgc.mineSwepper.control.RevealCellCommand;
 import software.ulpgc.mineSwepper.model.CellLocation;
 import software.ulpgc.mineSwepper.view.BoardController;
 
-public class CommandBuilder implements Builder {
+public class RevealCellCommandBuilder implements Builder {
     private final BoardController controller;
     private final CellLocation cellLocation;
 
-    public CommandBuilder(BoardController controller, CellLocation cellLocation) {
+    public RevealCellCommandBuilder(BoardController controller, CellLocation cellLocation) {
         this.controller = controller;
         this.cellLocation = cellLocation;
     }
