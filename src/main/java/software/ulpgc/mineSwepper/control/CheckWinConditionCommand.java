@@ -19,7 +19,7 @@ public class CheckWinConditionCommand implements Command{
         long revealedCells = getRevealedCells();
         int totalCells = controller.getBoard().cells.getRows() * controller.getBoard().cells.getColumns();
         if (revealedCells == totalCells - controller.getBoard().totalMines()) {
-            controller.showEndGameDialog("Congratulations! You won!");
+            controller.display().showEndGameDialog("Congratulations! You won!");
         }
     }
 

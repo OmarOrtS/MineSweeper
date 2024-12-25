@@ -1,6 +1,6 @@
 package software.ulpgc.mineSwepper;
 
-import software.ulpgc.mineSwepper.Listeners.ResetGameListener;
+import software.ulpgc.mineSwepper.Listeners.GameManagerListener;
 import software.ulpgc.mineSwepper.model.Board;
 import software.ulpgc.mineSwepper.model.Difficulty;
 import software.ulpgc.mineSwepper.model.Matrix;
@@ -8,12 +8,18 @@ import software.ulpgc.mineSwepper.view.MineSweeperGUI;
 
 import javax.swing.*;
 
-public class Main implements ResetGameListener {
+public class Main implements GameManagerListener {
     private MineSweeperGUI gameScreen;
     public static void main(String[] args) {
         Main main = new Main();
         main.startGame();
     }
+
+    @Override
+    public void onGameReset() {startGame();}
+
+    @Override
+    public void onExit() {System.exit(0);}
 
     private void startGame() {
         Difficulty difficulty = selectDifficulty();
@@ -46,7 +52,4 @@ public class Main implements ResetGameListener {
 
     private void disposeGameInstance() {if (gameScreen != null) gameScreen.getFrame().dispose();}
 
-    @Override
-    public void onGameReset() {
-        startGame();}
 }

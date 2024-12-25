@@ -2,7 +2,7 @@ package software.ulpgc.mineSwepper.view;
 
 import software.ulpgc.mineSwepper.Factories.Factory;
 import software.ulpgc.mineSwepper.Factories.MineSweeperGUICommandFactory;
-import software.ulpgc.mineSwepper.Listeners.ResetGameListener;
+import software.ulpgc.mineSwepper.Listeners.GameManagerListener;
 import software.ulpgc.mineSwepper.control.Command;
 import software.ulpgc.mineSwepper.model.Board;
 import software.ulpgc.mineSwepper.model.CellLocation;
@@ -22,9 +22,9 @@ public class MineSweeperGUI extends JFrame {
     private boolean firstClick = false;
     private final JFrame frame = new JFrame("MineSweeper");
 
-    public MineSweeperGUI(Board board, ResetGameListener resetGameListener) {
+    public MineSweeperGUI(Board board, GameManagerListener gameManagerListener) {
         JButton[][] buttons = new JButton[board.cells.getRows()][board.cells.getColumns()];
-        BoardController controller = new BoardController(board, buttons, resetGameListener);
+        BoardController controller = new BoardController(board, buttons, gameManagerListener);
         this.factory = MineSweeperGUICommandFactory.CreateCommandFactoryWith(controller);
         this.commands = factory.factorize();
         frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -13,8 +13,6 @@ public class RevealCellCommand implements Command {
     }
 
     @Override
-    public void execute() {
-        controller.revealCell(cellLocation);
-    }
+    public void execute() {controller.revealCell(cellLocation);}
 
 }

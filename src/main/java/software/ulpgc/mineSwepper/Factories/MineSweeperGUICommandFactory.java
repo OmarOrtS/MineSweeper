@@ -21,8 +21,7 @@ public class MineSweeperGUICommandFactory implements Factory{
         this.controller = controller;
     }
 
-    public static Factory CreateCommandFactoryWith(BoardController controller) {
-        return new MineSweeperGUICommandFactory(controller);}
+    public static Factory CreateCommandFactoryWith(BoardController controller) {return new MineSweeperGUICommandFactory(controller);}
 
     @Override
     public Map<String, Command> factorize() {return createCommands();}
