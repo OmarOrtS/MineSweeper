@@ -33,7 +33,6 @@ public class BoardController {
             button.setText("💣");
             button.setBackground(Color.RED);
             showEndGameDialog("Game Over! You hit a mine!");
-            resetGame();
         } else {
             int adjacentMines = revealedCell.getAdjacentMine();
             button.setText(adjacentMines > 0 ? String.valueOf(adjacentMines) : "");
@@ -45,6 +44,8 @@ public class BoardController {
             }
         }
     }
+
+    public void placeFlag(JButton button) {button.setText(button.getText().equals("🚩") ? "" : "🚩");}
 
     private void propagateReveal(CellLocation cellLocation) {
         int[] directions = {-1, 0, 1};
@@ -71,8 +72,7 @@ public class BoardController {
     }
 
     public void showEndGameDialog(String message) {
-        int option = showOptionDialog(message);
-        switch (option) {
+        switch (showOptionDialog(message)) {
             case JOptionPane.YES_OPTION -> resetGame();
             case JOptionPane.NO_OPTION -> System.exit(0);
         }
@@ -94,4 +94,5 @@ public class BoardController {
     private void resetGame() {resetGameListener.onGameReset();}
 
     public Board getBoard() {return board;}
+
 }

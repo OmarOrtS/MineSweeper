@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d66ad718-5c59-4f91-a854-f2071295ca97" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Builders/CheckWinConditionCommandBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Listeners/ResetGameListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/control/CheckWinConditionCommand.java" afterDir="false" />
+    <list default="true" id="d66ad718-5c59-4f91-a854-f2071295ca97" name="Changes" comment="Game is playable now is possible to either win or lose">
+      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Difficulty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Builders/GenerateMinesCommandBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Builders/GenerateMinesCommandBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Factories/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Factories/Factory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Factories/MineSweeperGUICommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Factories/MineSweeperGUICommandFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/control/GenerateMinesCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/control/GenerateMinesCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/MineSweeperGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/MineSweeperGUI.java" afterDir="false" />
     </list>
@@ -27,6 +22,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -177,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734981232627</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Game is playable now is possible to either win or lose">
+      <option name="closed" value="true" />
+      <created>1735141909176</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1735141909176</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,7 +209,53 @@
     <MESSAGE value="Refactored addButtonsToFrame method for MineSweeperGUI class" />
     <MESSAGE value="Added Factory and builder for commands to prevent violating Demeter´s Law on MineSweeperGUI.&#10;Probably will change Board.generateMines nad Board.calculateAdjacentMines methods to Commands to generate mines and calculate adjacent mines after the first click" />
     <MESSAGE value="Added new Commands to have Board class with fewer responsibilities" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added new Commands to have Board class with fewer responsibilities" />
+    <MESSAGE value="Game is playable now is possible to either win or lose" />
+    <option name="LAST_COMMIT_MESSAGE" value="Game is playable now is possible to either win or lose" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java</url>
+          <line>49</line>
+          <properties class="software.ulpgc.mineSwepper.Main" method="onGameReset">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

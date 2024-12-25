@@ -2,8 +2,11 @@ package software.ulpgc.mineSwepper;
 
 import software.ulpgc.mineSwepper.Listeners.ResetGameListener;
 import software.ulpgc.mineSwepper.model.Board;
+import software.ulpgc.mineSwepper.model.Difficulty;
 import software.ulpgc.mineSwepper.model.Matrix;
 import software.ulpgc.mineSwepper.view.MineSweeperGUI;
+
+import javax.swing.*;
 
 public class Main implements ResetGameListener {
     private MineSweeperGUI gameScreen;
@@ -13,17 +16,37 @@ public class Main implements ResetGameListener {
     }
 
     private void startGame() {
+        Difficulty difficulty = selectDifficulty();
+        if (difficulty == null) System.exit(1);
         disposeGameInstance();
-        gameScreen = new MineSweeperGUI(Board.createBoard(new Matrix(16, 16), 40), this);
+        gameScreen = new MineSweeperGUI(Board.createBoard(new Matrix(difficulty.getRows(), difficulty.getColumns()),
+                difficulty.getMines()), this);
     }
 
-    private void disposeGameInstance() {
-        if (gameScreen != null) gameScreen.getFrame().dispose();
+    private static Difficulty selectDifficulty() {
+        String[] options = {"Easy", "Medium", "Hard"};
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Select Difficulty:",
+                "Minesweeper Difficulty",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
+        return switch (choice){
+            case 0 -> Difficulty.EASY;
+            case 1 -> Difficulty.MEDIUM;
+            case 2 -> Difficulty.HARD;
+            default -> null;
+        };
     }
+
+    private void disposeGameInstance() {if (gameScreen != null) gameScreen.getFrame().dispose();}
 
     @Override
     public void onGameReset() {
-        startGame();
-    }
-
+        startGame();}
 }

@@ -9,6 +9,8 @@ import software.ulpgc.mineSwepper.model.CellLocation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Map;
 import java.util.stream.IntStream;
 
@@ -16,29 +18,43 @@ import static java.util.Arrays.asList;
 
 public class MineSweeperGUI extends JFrame {
     private final Map<String, Command> commands;
-    private final JButton[][] buttons;
     private final Factory factory;
     private boolean firstClick = false;
     private final JFrame frame = new JFrame("MineSweeper");
 
     public MineSweeperGUI(Board board, ResetGameListener resetGameListener) {
-        this.buttons = new JButton[board.cells.getRows()][board.cells.getColumns()];
-        this.factory = MineSweeperGUICommandFactory.CreateCommandFactoryWith(board, this.buttons, resetGameListener);
+        JButton[][] buttons = new JButton[board.cells.getRows()][board.cells.getColumns()];
+        BoardController controller = new BoardController(board, buttons, resetGameListener);
+        this.factory = MineSweeperGUICommandFactory.CreateCommandFactoryWith(controller);
         this.commands = factory.factorize();
         frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         frame.setLayout(new GridLayout(board.cells.getRows(), board.cells.getColumns()));
-        addButtonsToFrame(frame, board);
-        frame.setSize(800, 800);
+        addButtonsToFrame(frame, board, controller, buttons);
+        frame.setSize(1300, 1000);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    private void addButtonsToFrame(JFrame frame, Board board) {
+    private void addButtonsToFrame(JFrame frame, Board board, BoardController controller, JButton[][] buttons) {
         IntStream.range(0, board.cells.getRows()).forEach(i ->
                 IntStream.range(0, board.cells.getColumns()).forEach(j -> {
                     JButton button = createButton();
-                    button.addActionListener(e -> getCommandsForButton(new CellLocation(i,j)));
-                    this.buttons[i][j] = button;
+                    button.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            CellLocation cellLocation = new CellLocation(i, j);
+                            if (isRevealed(cellLocation)) return;
+                            switch (e.getButton()) {
+                                case MouseEvent.BUTTON1 -> getCommandsForButton(cellLocation);
+                                case MouseEvent.BUTTON3 -> controller.placeFlag(button);
+                            }
+                        }
+
+                        private boolean isRevealed(CellLocation cellLocation) {
+                            return board.cells.getCells()[cellLocation.x()][cellLocation.y()].isRevealed();
+                        }
+                    });
+                    buttons[i][j] = button;
                     frame.add(button);
                 })
         );
@@ -58,7 +74,7 @@ public class MineSweeperGUI extends JFrame {
 
     private static JButton createButton() {
         JButton button = new JButton();
-        button.setFont(new Font("Arial", Font.BOLD, 12));
+        button.setFont(new Font("Arial", Font.BOLD, 10));
         button.setFocusPainted(false);
         return button;
     }
