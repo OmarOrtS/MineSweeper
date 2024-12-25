@@ -9,9 +9,11 @@ import java.util.Random;
 public class GenerateMinesCommand implements Command{
     private final Board board;
     private boolean minesGenerated = false;
+    private final CellLocation excludedCell;
 
-    public GenerateMinesCommand(Board board) {
+    public GenerateMinesCommand(Board board, CellLocation excludedCell) {
         this.board = board;
+        this.excludedCell = excludedCell;
     }
 
     @Override
@@ -28,10 +30,14 @@ public class GenerateMinesCommand implements Command{
         while (placedMines < board.totalMines()){
             int randomRow = rand.nextInt(board.cells.getRows());
             int randomCol = rand.nextInt(board.cells.getColumns());
-            if (board.cellIsNotMine(randomRow, randomCol)) {
+            if (board.cellIsNotMine(randomRow, randomCol) && notClickedCell(randomRow, randomCol)) {
             board.cells.getCells()[randomRow][randomCol] = new Cell(true, false, 0);
             placedMines++;
             }
         }
+    }
+
+    private boolean notClickedCell(int randomRow, int randomCol) {
+        return !excludedCell.equals(new CellLocation(randomRow, randomCol));
     }
 }

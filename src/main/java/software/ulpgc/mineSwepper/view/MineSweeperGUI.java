@@ -1,6 +1,8 @@
 package software.ulpgc.mineSwepper.view;
 
+import software.ulpgc.mineSwepper.Factories.Factory;
 import software.ulpgc.mineSwepper.Factories.MineSweeperGUICommandFactory;
+import software.ulpgc.mineSwepper.Listeners.ResetGameListener;
 import software.ulpgc.mineSwepper.control.Command;
 import software.ulpgc.mineSwepper.model.Board;
 import software.ulpgc.mineSwepper.model.CellLocation;
@@ -15,15 +17,19 @@ import static java.util.Arrays.asList;
 public class MineSweeperGUI extends JFrame {
     private final Map<String, Command> commands;
     private final JButton[][] buttons;
+    private final Factory factory;
+    private boolean firstClick = false;
+    private final JFrame frame = new JFrame("MineSweeper");
 
-    public MineSweeperGUI(Board board) {
+    public MineSweeperGUI(Board board, ResetGameListener resetGameListener) {
         this.buttons = new JButton[board.cells.getRows()][board.cells.getColumns()];
-        this.commands = MineSweeperGUICommandFactory.CreateCommandFactoryWith(board, this.buttons).factorize();
-        JFrame frame = new JFrame("MineSweeper");
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.factory = MineSweeperGUICommandFactory.CreateCommandFactoryWith(board, this.buttons, resetGameListener);
+        this.commands = factory.factorize();
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         frame.setLayout(new GridLayout(board.cells.getRows(), board.cells.getColumns()));
         addButtonsToFrame(frame, board);
         frame.setSize(800, 800);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -39,8 +45,15 @@ public class MineSweeperGUI extends JFrame {
     }
 
     private void getCommandsForButton(CellLocation cellLocation) {
-        asList("GenerateMines", "CalculateAdjacentMines", "Reveal:" + cellLocation.x() + ":" + cellLocation.y())
+        if (!firstClick) generateMines(cellLocation);
+        asList("GenerateMines", "CalculateAdjacentMines",
+                "Reveal:" + cellLocation.x() + ":" + cellLocation.y(),"CheckWinCondition")
                 .forEach(s -> commands.get(s).execute());
+    }
+
+    private void generateMines(CellLocation cellLocation) {
+        factory.createCommandOnDemand(cellLocation);
+        firstClick = true;
     }
 
     private static JButton createButton() {
@@ -50,4 +63,5 @@ public class MineSweeperGUI extends JFrame {
         return button;
     }
 
+    public JFrame getFrame() {return frame;}
 }

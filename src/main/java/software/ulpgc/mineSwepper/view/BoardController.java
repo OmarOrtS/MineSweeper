@@ -1,5 +1,6 @@
 package software.ulpgc.mineSwepper.view;
 
+import software.ulpgc.mineSwepper.Listeners.ResetGameListener;
 import software.ulpgc.mineSwepper.model.Board;
 import software.ulpgc.mineSwepper.model.Cell;
 import software.ulpgc.mineSwepper.model.CellLocation;
@@ -11,10 +12,12 @@ import java.util.Arrays;
 public class BoardController {
     private final Board board;
     private final JButton[][] buttons;
+    private final ResetGameListener resetGameListener;
 
-    public BoardController(Board board, JButton[][] buttons) {
+    public BoardController(Board board, JButton[][] buttons, ResetGameListener resetGameListener) {
         this.board = board;
         this.buttons = buttons;
+        this.resetGameListener = resetGameListener;
     }
 
     public void revealCell(CellLocation cellLocation) {
@@ -29,8 +32,8 @@ public class BoardController {
         if (revealedCell.isMine()) {
             button.setText("💣");
             button.setBackground(Color.RED);
-            JOptionPane.showMessageDialog(null, "Game Over! You hit a mine!");
-            //resetGame();
+            showEndGameDialog("Game Over! You hit a mine!");
+            resetGame();
         } else {
             int adjacentMines = revealedCell.getAdjacentMine();
             button.setText(adjacentMines > 0 ? String.valueOf(adjacentMines) : "");
@@ -41,7 +44,6 @@ public class BoardController {
                 propagateReveal(cellLocation);
             }
         }
-        checkWinCondition();
     }
 
     private void propagateReveal(CellLocation cellLocation) {
@@ -68,17 +70,28 @@ public class BoardController {
         return cellLocation.x() >= 0 && cellLocation.x() < board.cells.getRows() && cellLocation.y() >= 0 && cellLocation.y() < board.cells.getColumns();
     }
 
-    private void checkWinCondition() {
-        long revealedCells = Arrays.stream(board.cells.getCells())
-                .flatMap(Arrays::stream)
-                .filter(c -> !c.isMine())
-                .filter(Cell::isRevealed)
-                .count();
-        int totalCells = board.cells.getRows() * board.cells.getColumns();
-        if (revealedCells == totalCells - board.totalMines()) {
-            JOptionPane.showMessageDialog(null, "Congratulations! You won!");
-            //resetGame();
+    public void showEndGameDialog(String message) {
+        int option = showOptionDialog(message);
+        switch (option) {
+            case JOptionPane.YES_OPTION -> resetGame();
+            case JOptionPane.NO_OPTION -> System.exit(0);
         }
     }
 
+    private static int showOptionDialog(String message) {
+        return JOptionPane.showOptionDialog(
+                null,
+                message + "\nDo you want to play again?",
+                "Game Over",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                new String[]{"Restart", "Exit"},
+                "Restart"
+        );
+    }
+
+    private void resetGame() {resetGameListener.onGameReset();}
+
+    public Board getBoard() {return board;}
 }
