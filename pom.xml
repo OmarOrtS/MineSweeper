@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>software.ulpgc.mineSweeper</groupId>
     <artifactId>MineSweeperGame</artifactId>
-    <version>0.8.0</version>
+    <version>1.0.0</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -23,7 +23,62 @@
         </dependency>
     </dependencies>
 
-
+    <build>
+        <finalName>${artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>software.ulpgc.es.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>jpackage</executable>
+                    <arguments>
+                        <argument>--input</argument>
+                        <argument>target/</argument>
+                        <argument>--name</argument>
+                        <argument>${artifactId}</argument>
+                        <argument>--main-jar</argument>
+                        <argument>${artifactId}.jar</argument>
+                        <argument>--main-class</argument>
+                        <argument>software.ulpgc.mineSwepper.Main</argument>
+                        <argument>--type </argument>
+                        <argument>exe</argument>
+                        <argument>--icon</argument>
+                        <argument>src/main/resources/MineSweeper.ico</argument>
+                        <argument>--win-shortcut</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

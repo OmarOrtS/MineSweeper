@@ -2,6 +2,7 @@ package software.ulpgc.mineSwepper.view;
 
 import software.ulpgc.mineSwepper.Listeners.GameStateListener;
 import software.ulpgc.mineSwepper.Listeners.GameManagerListener;
+import software.ulpgc.mineSwepper.Loaders.ImageIconIconLoader;
 import software.ulpgc.mineSwepper.model.Board;
 import software.ulpgc.mineSwepper.model.Cell;
 import software.ulpgc.mineSwepper.model.CellLocation;
@@ -15,12 +16,16 @@ public class BoardController implements GameStateListener {
     private final JButton[][] buttons;
     private final GameManagerListener gameManagerListener;
     private final GameDialogDisplay gameDialogDisplay;
+    private final ImageIcon mineIcon;
+    private final ImageIcon flagIcon;
 
     public BoardController(Board board, JButton[][] buttons, GameManagerListener gameManagerListener) {
         this.board = board;
         this.buttons = buttons;
         this.gameManagerListener = gameManagerListener;
         gameDialogDisplay = new GameDialogDisplay(this);
+        this.mineIcon = new ImageIconIconLoader("/Minesweeper_mine.png").load();
+        this.flagIcon = new ImageIconIconLoader("/Minesweeper_flag.png").load();
     }
 
     @Override
@@ -43,14 +48,10 @@ public class BoardController implements GameStateListener {
 
         JButton button = buttons[cellLocation.x()][cellLocation.y()];
         if (revealedCell.isMine()) {
-            button.setText("💣");
-            button.setBackground(Color.RED);
+            setMineVisuals(button);
             gameDialogDisplay.showEndGameDialog("Game Over! You hit a mine!");
         } else {
-            int adjacentMines = revealedCell.getAdjacentMine();
-            button.setText(adjacentMines > 0 ? String.valueOf(adjacentMines) : "");
-            button.setEnabled(false);
-            button.setBackground(Color.LIGHT_GRAY);
+            int adjacentMines = setRevealedCellVisuals(revealedCell, button);
 
             if (adjacentMines == 0) {
                 propagateReveal(cellLocation);
@@ -58,7 +59,21 @@ public class BoardController implements GameStateListener {
         }
     }
 
-    public void placeFlag(JButton button) {button.setText(button.getText().equals("🚩") ? "" : "🚩");}
+    private static int setRevealedCellVisuals(Cell revealedCell, JButton button) {
+        int adjacentMines = revealedCell.getAdjacentMine();
+        button.setText(adjacentMines > 0 ? String.valueOf(adjacentMines) : "");
+        button.setBackground(Color.LIGHT_GRAY);
+        button.setEnabled(false);
+        return adjacentMines;
+    }
+
+    private void setMineVisuals(JButton button) {
+        button.setIcon(mineIcon);
+        button.setText("");
+        button.setBackground(Color.RED);
+    }
+
+    public void placeFlag(JButton button) {button.setIcon(button.getIcon() == null ? flagIcon : null);}
 
     private void propagateReveal(CellLocation cellLocation) {
         int[] directions = {-1, 0, 1};
@@ -71,8 +86,11 @@ public class BoardController implements GameStateListener {
 
     private boolean cellIsValidToReval(CellLocation cellLocation, int x, int y) {
         return cellIsWithinLimits(nextCell(cellLocation, x, y))
-                && cellIsNotRevealed(nextCell(cellLocation, x, y));
+                && cellIsNotRevealed(nextCell(cellLocation, x, y))
+                && cellIsNotFlagged(nextCell(cellLocation, x, y));
     }
+
+    private boolean cellIsNotFlagged(CellLocation cellLocation) {return buttons[cellLocation.x()][cellLocation.y()].getIcon()==null;}
 
     private static CellLocation nextCell(CellLocation cellLocation, int x, int y) {
         return new CellLocation(cellLocation.x() + x, cellLocation.y() + y);
