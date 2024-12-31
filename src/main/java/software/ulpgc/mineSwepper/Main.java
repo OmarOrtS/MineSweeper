@@ -1,14 +1,16 @@
 package software.ulpgc.mineSwepper;
 
-import software.ulpgc.mineSwepper.Listeners.GameManagerListener;
+import software.ulpgc.mineSwepper.Listeners.GameMasterListener;
+import software.ulpgc.mineSwepper.Loaders.ImageIconIconLoader;
 import software.ulpgc.mineSwepper.model.Board;
 import software.ulpgc.mineSwepper.model.Difficulty;
+import software.ulpgc.mineSwepper.model.Dimension;
 import software.ulpgc.mineSwepper.model.Matrix;
 import software.ulpgc.mineSwepper.view.MineSweeperGUI;
 
 import javax.swing.*;
 
-public class Main implements GameManagerListener {
+public class Main implements GameMasterListener {
     private MineSweeperGUI gameScreen;
     public static void main(String[] args) {
         Main main = new Main();
@@ -31,13 +33,14 @@ public class Main implements GameManagerListener {
 
     private static Difficulty selectDifficulty() {
         String[] options = {"Easy", "Medium", "Hard"};
+        ImageIcon icon = new ImageIconIconLoader("/MineSweeper.ico", new Dimension(5,5)).load();
         int choice = JOptionPane.showOptionDialog(
                 null,
                 "Select Difficulty:",
                 "Minesweeper Difficulty",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
-                null,
+                icon,
                 options,
                 options[0]
         );

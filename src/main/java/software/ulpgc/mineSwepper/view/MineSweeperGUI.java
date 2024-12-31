@@ -2,13 +2,15 @@ package software.ulpgc.mineSwepper.view;
 
 import software.ulpgc.mineSwepper.Factories.Factory;
 import software.ulpgc.mineSwepper.Factories.MineSweeperGUICommandFactory;
-import software.ulpgc.mineSwepper.Listeners.GameManagerListener;
+import software.ulpgc.mineSwepper.Listeners.GameMasterListener;
 import software.ulpgc.mineSwepper.control.Command;
 import software.ulpgc.mineSwepper.model.Board;
 import software.ulpgc.mineSwepper.model.CellLocation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
@@ -22,9 +24,9 @@ public class MineSweeperGUI extends JFrame {
     private boolean firstClick = false;
     private final JFrame frame = new JFrame("MineSweeper");
 
-    public MineSweeperGUI(Board board, GameManagerListener gameManagerListener) {
+    public MineSweeperGUI(Board board, GameMasterListener gameMasterListener) {
         JButton[][] buttons = new JButton[board.cells.getRows()][board.cells.getColumns()];
-        BoardController controller = new BoardController(board, buttons, gameManagerListener);
+        BoardController controller = new BoardController(board, buttons, gameMasterListener);
         this.factory = MineSweeperGUICommandFactory.CreateCommandFactoryWith(controller);
         this.commands = factory.factorize();
         frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -33,6 +35,18 @@ public class MineSweeperGUI extends JFrame {
         frame.setSize(1300, 1000);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        controller.loadIconsForButtons(buttons);
+        addResizeListener(controller);
+    }
+
+    private void addResizeListener(BoardController controller) {
+        frame.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                controller.adjustIconsToNewScreenSize();
+                controller.adjustButtonsFont();
+            }
+        });
     }
 
     private void addButtonsToFrame(JFrame frame, Board board, BoardController controller, JButton[][] buttons) {

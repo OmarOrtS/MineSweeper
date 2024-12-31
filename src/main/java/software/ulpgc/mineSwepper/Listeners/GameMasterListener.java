@@ -1,6 +1,6 @@
 package software.ulpgc.mineSwepper.Listeners;
 
-public interface GameManagerListener {
+public interface GameMasterListener {
     void onGameReset();
     void onExit();
 }

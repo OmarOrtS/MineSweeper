@@ -4,15 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d66ad718-5c59-4f91-a854-f2071295ca97" name="Changes" comment="Game Finished&#10;TODO: add icons for flags and mines">
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Loaders/IconLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Loaders/ImageIconIconLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/MineSweeper.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Minesweeper_flag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Minesweeper_mine.png" afterDir="false" />
+    <list default="true" id="d66ad718-5c59-4f91-a854-f2071295ca97" name="Changes" comment="Added icons and necessary code to create .exe">
+      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Listeners/GameControlListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Listeners/GameViewListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Loaders/ResourceLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/model/Dimension.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/BoardLogic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/BoardViewUpdater.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/GameStateController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Listeners/GameManagerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Listeners/GameMasterListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Listeners/GameStateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Listeners/GameStateListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Loaders/ImageIconIconLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Loaders/ImageIconIconLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/MineSweeperGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/ulpgc/mineSwepper/view/MineSweeperGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,19 +46,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/omar_/IdeaProjects/MineSweeperGame/src/main/resources",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "File.Encoding"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/omar_/IdeaProjects/MineSweeperGame/src/main/resources&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="software.ulpgc.mineSwepper.Listeners" />
@@ -205,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735150265507</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Added icons and necessary code to create .exe">
+      <option name="closed" value="true" />
+      <created>1735499552014</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1735499552014</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,7 +250,8 @@
     <MESSAGE value="Game is playable now is possible to either win or lose" />
     <MESSAGE value="Difficulty options added" />
     <MESSAGE value="Game Finished&#10;TODO: add icons for flags and mines" />
-    <option name="LAST_COMMIT_MESSAGE" value="Game Finished&#10;TODO: add icons for flags and mines" />
+    <MESSAGE value="Added icons and necessary code to create .exe" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added icons and necessary code to create .exe" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
